@@ -16,7 +16,7 @@ public class Camion extends Vehiculo {
         System.out.println("│  Marca/Modelo  : " + getMarca() + " " + getModelo());
         System.out.println("│  Cap. de Carga : " + getCapacidadCarga() + " kg");
         System.out.println("│  Ejes          : " + ejes );
-        System.out.println("│  Disponible    : " + (isDisponible() ? "Sí" : "No"));
+        System.out.println("│  Estado    : " + (isDisponible() ? "Disponible" : "No Disponible"));
         System.out.println("└──────────────────────────────────────────────────");
     }
 }
