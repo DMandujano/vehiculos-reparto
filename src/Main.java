@@ -44,23 +44,8 @@ import java.util.*;
                     case 6 -> {// Dante
                         marcarNoDisponible(sc, vehiculos);
                     }
-
-                    case 7 -> { // Renato
-                        System.out.println("\n==== REPORTE GENERAL ====");
-                        mostrarVehiculos(vehiculos);
-                        System.out.println("\nTotal de vehículos registrados: " + vehiculos.size());
-                        System.out.println("Total de vehículos disponibles: " + vehiculos.stream().filter(Vehiculo::isDisponible).count()); 
-                        System.out.println("Total de vehículos no disponibles: " + vehiculos.stream().filter(v -> !v.isDisponible()).count());  
-                        //CAMION
-                        System.out.println("\n--- Camiones ---");
-                        vehiculos.stream().filter(v -> v instanceof Camion).forEach(v -> v.mostrarDetalle());
-                        //FURGON
-                        System.out.println("\n--- Furgones ---");
-                        vehiculos.stream().filter(v -> v instanceof Furgon).forEach(v -> v.mostrarDetalle());
-                        //MOTO DE REPARTO
-                        System.out.println("\n--- Motos de Reparto ---");
-                        vehiculos.stream().filter(v -> v instanceof MotoReparto).forEach(v -> v.mostrarDetalle());
-                        
+                    case 7 ->{// Renato
+                        mostrarReporteGeneral(vehiculos);
                     }
                     case 8 -> System.out.println("Saliendo del sistema...");
                     default -> System.out.println("❌ Opción no válida.");
@@ -311,5 +296,58 @@ import java.util.*;
 
             System.out.println("Error: No se encontró un vehículo con esa patente.");
         }
+        // OPCION 7 - REPORTE GENERAL
+        private static void mostrarReporteGeneral(List<Vehiculo> vehiculos) {
+            System.out.println("\n==== REPORTE GENERAL ====");
+            // Muestra cuántos vehículos hay en total en la lista
+            System.out.println("Total de vehículos registrados: " + vehiculos.size());
 
+            // Contadores para disponibles y no disponibles
+            int disponibles = 0;
+            int noDisponibles = 0;
+            // Recorre toda la lista y suma según el estado de cada vehículo
+            for (Vehiculo v : vehiculos) {
+                if (v.isDisponible()) {
+                    disponibles++;
+                } else {
+                    noDisponibles++;
+                }
+            }
+            System.out.println("Total de vehículos disponibles: " + disponibles);
+            System.out.println("Total de vehículos no disponibles: " + noDisponibles);
+
+            // Recorre la lista y muestra solo los que son instancias de Camion
+            // instanceof verifica si el objeto es de ese tipo
+            System.out.println("\n--- Camiones ---");
+            boolean hayCamiones = false;
+            for (Vehiculo v : vehiculos) {
+                if (v instanceof Camion) {
+                    v.mostrarDetalle(); // Llama al mostrarDetalle() propio de Camion (polimorfismo)
+                    hayCamiones = true;
+                }
+            }
+            if (!hayCamiones) System.out.println("No hay camiones registrados.");
+
+            // Igual que camiones pero filtrando solo Furgon
+            System.out.println("\n--- Furgones ---");
+            boolean hayFurgones = false;
+            for (Vehiculo v : vehiculos) {
+                if (v instanceof Furgon) {
+                    v.mostrarDetalle(); // Llama al mostrarDetalle() propio de Furgon (polimorfismo)
+                    hayFurgones = true;
+                }
+            }
+            if (!hayFurgones) System.out.println("No hay furgones registrados.");
+
+            // Igual pero filtrando solo MotoReparto
+            System.out.println("\n--- Motos de Reparto ---");
+            boolean hayMotos = false;
+            for (Vehiculo v : vehiculos) {
+                if (v instanceof MotoReparto) {
+                    v.mostrarDetalle(); // Llama al mostrarDetalle() propio de MotoReparto (polimorfismo)
+                    hayMotos = true;
+                }
+            }
+            if (!hayMotos) System.out.println("No hay motos de reparto registradas.");
+        }
     }
