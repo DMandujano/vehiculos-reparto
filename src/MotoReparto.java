@@ -29,7 +29,7 @@ public class MotoReparto extends Vehiculo {
         System.out.println("│  Marca/Modelo  : " + getMarca() + " " + getModelo());
         System.out.println("│  Cap. de Carga : " + getCapacidadCarga() + " kg");
         System.out.println("│  Caja Térmica  : " + (tieneCajaTermica ? "Sí" : "No"));
-        System.out.println("│  Estado        : " + (isDisponible() ? "Sí" : "No")); //Estaba llamando mal al atributo "disponible"
+        System.out.println("│  Estado        : " + (isDisponible() ? "Disponible" : "No Disponible")); //Estaba llamando mal al atributo "disponible"
         System.out.println("└──────────────────────────────────────────────────");
     }
 
